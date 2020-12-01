@@ -27,7 +27,10 @@
 
 // import React, { Component } from 'react';
 import * as React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Link} from 'react-router-dom';
+import About from './About'
+import Login from './Login'
 
 // var a = 2;
 const App = () =>(
@@ -35,40 +38,36 @@ const App = () =>(
   <div>
     <Route exact path="/"component={Home}/>
     <Route path="/about"component={About}/> 
+    <Route path="/login"component={Login}/>     
     </div>
   </BrowserRouter>
 )
+export default App;
 
-const urlDATA = './api/v1/list';
-async function activateLasers(){
-  // alert("Pushed!");
-  const res = await window.fetch(urlDATA);
-  //  const users = await res.json();
-  console.log(res);
-  // console.log(users);
-
-}
 
 const Home =()=>{
+
+  // const urlDATA = './api/v1/list';
+  async function activateLasers(){
+  // alert("Pushed!");
+  const res = await window.fetch("https://jsonplaceholder.typicode.com/users");
+  const users = await res.json();
+  //console.log(res);
+  console.log(users);
+
+}
   return( 
-    <div>
+    <div className="text-center">
       <h1>Welcome</h1>
       <p>'abc'</p>
-      <p><Link to="/about">about</Link></p>
+      <p><Link to="/about">About</Link></p>
+      <p><Link to="/login">Login</Link></p>
       <button onClick={activateLasers}>
-     Activate Lasers
+     ログイン
       </button>
     </div>
     
   )
 }
-const About =()=>{
-  return(
-    <div>
-      <h1>about</h1>
-      <p><Link to="/">home</Link></p>
-    </div>
-  )
-}
 
-export default App;
+
